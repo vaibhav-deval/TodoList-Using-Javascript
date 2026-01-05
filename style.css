@@ -1,134 +1,213 @@
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.container {
+html,
+body {
   width: 100%;
-  min-height: 100vh;
-  background: linear-gradient(135deg, red 30%, blue 70%);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  height: 100%;
 }
 
-.app {
-  width: 90%;
-  max-width: 450px;
-  height: auto;
-  padding: 20px;
-  background-color: aliceblue;
-  margin-top: 50px;
-  border-radius: 20px;
+:root {
+  --primary-color: #ff6f61;
+  --secondary-color: #4a90e2;
+  --white-color: #d2d2d2;
+  --background-color1: #1a1919;
+  --background-color2: #333232;
+  --p-1: 5px;
+  --p-2: 10px;
+  --p-3: 15px;
+  --p-4: 20px;
+  --p-5: 25px;
+  --m-1: 5px;
+  --m-2: 10px;
+  --m-3: 15px;
+  --m-4: 20px;
+  --m-5: 25px;
+  --radius-1: 5px;
+  --radius-2: 10px;
+  --radius-3: 15px;
+  --radius-4: 20px;
+  --radius-5: 25px;
 }
-h2 {
-  margin-left: 30px;
+
+main {
+  padding: var(--p-4);
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--background-color1);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+nav {
+  border-radius: var(--radius-3);
+  padding: var(--p-3);
+  width: 100%;
+  height: 60px;
+  background-color: var(--background-color2);
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
-h2 img {
-  margin: 10px 20px;
-  width: 27px;
-  height: auto;
+
+nav h1 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
 }
-.inputDiv {
+nav button {
+  padding: var(--p-2) var(--p-3);
+  border: none;
+  border-radius: var(--radius-4);
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+nav button:hover {
+  border: 1px solid var(--secondary-color);
+  background-color: var(--primary-color);
+}
+
+section {
+  padding-block: var(--p-4);
+  flex-grow: 1;
+  width: 100%;
+  color: var(--white-color);
+  display: flex;
+  align-items: center;
+  gap: var(--m-4);
+}
+section .sectionColumns {
+  background-color: var(--background-color2);
+  flex-grow: 1;
+  height: 100%;
+  border-radius: var(--radius-3);
+  padding: var(--p-3);
+  display: flex;
+  flex-direction: column;
+  max-width: calc(100% / 3);
+  gap: var(--m-2);
+}
+
+.sectionColumns .sectionHeadings {
+  font-size: 1.25rem;
+  margin-bottom: var(--m-3);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(223, 232, 241);
-  border-radius: 20px;
-  margin: 10px 15px;
-}
-input {
-  border: none;
-  outline: none;
-  border-radius: 20px;
-  font-size: 15px;
-  margin: 0px auto;
-  padding: 5px;
-  background-color: transparent;
+  color: var(--white-color);
 }
 
-button {
-  border: 0;
-  border-radius: 20px;
-  font-size: 15px;
-  padding: 15px 25px;
-  background-color: rgb(254, 105, 19);
-  cursor: pointer;
-  color: aliceblue;
-}
-
-button:hover {
-  background-color: rgb(250, 92, 0);
-}
-ul {
-  margin-top: 15px;
-}
-ul li {
-  user-select: none;
-  list-style: none;
-  padding: 12px 8px 12px 50px;
-  font-size: 18px;
+.sectionColumns .task {
+  text-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  gap: var(--m-4);
+  overflow: hidden;
+  cursor: grab;
+  background-color: var(--background-color1);
+  border-radius: var(--radius-2);
   position: relative;
+}
+
+.task .upper {
+  background-color: var(--primary-color);
+  padding: var(--p-3) var(--p-2);
+  font-size: 1rem;
+  color: var(--white-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+}
+.task .lower {
+  padding-inline: var(--p-2);
+  padding-bottom: var(--p-3);
+  border-radius: var(--radius-2);
+  font-size: 0.9rem;
+  color: var(--white-color);
+  transform: translateY(-100%);
+  transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+  height: 0;
+  opacity: 0;
+  scale: 0.5;
+}
+.task:has(:hover) .lower {
+  transform: translateY(0);
+  height: auto;
+  opacity: 1;
+  scale: 1;
+}
+
+.taskDltBtn {
+  border: none;
+  background-color: var(--secondary-color);
+  padding: var(--p-1) var(--p-2);
+  border-radius: var(--radius-3);
+  color: var(--white-color);
   cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+.taskDltBtn:hover {
+  scale: 1.1;
 }
 
-ul li::before {
-  content: "";
-  width: 20px;
-  height: 20px;
-
-  left: 20px;
-  top: 13px;
+.addTaskWindow {
+  min-width: 500px;
   position: absolute;
-  background-image: url(/Todo-List-Using-Javascript/assets/unchecked-checkbox.png);
-  background-size: cover;
-  background-position: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  background-color: var(--background-color2);
+  padding: var(--p-4);
+  border: 3px solid var(--primary-color);
+  border-radius: var(--radius-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--m-3);
+}
+.addTaskWindow form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--m-3);
 }
 
-ul li.checked {
-  text-decoration: line-through;
-}
-ul li.checked::before {
-  background-image: url(/Todo-List-Using-Javascript/assets/checked-checkbox.png);
-}
-ul li span {
-  position: absolute;
-  right: 20px;
-
-  padding: 2.5px 6px;
-  font-size: 20px;
-  border-radius: 50%;
-  text-align: center;
-  color: #555;
+form input,
+form select,
+form textarea {
+  color: var(--secondary-color);
+  outline: none;
+  padding: var(--p-2);
+  border-radius: var(--radius-2);
+  border: none;
+  font-size: 1rem;
 }
 
-ul li span:hover {
-  background: #edeef0;
+form label {
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+form button {
+  padding: var(--p-2);
+  border: none;
+  border-radius: var(--radius-2);
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  font-size: 1rem;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
-@media (max-width: 600px) {
-  .app {
-    width: 95%;
-    padding: 15px;
-  }
 
-  h2 {
-    font-size: 1.8rem;
-  }
-
-  .inputDiv {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  input {
-    width: 100%;
-    padding: 10px;
-  }
-
-  button {
-    width: 100%;
-    font-size: 14px;
-  }
+form button:hover {
+  background-color: var(--secondary-color);
 }
