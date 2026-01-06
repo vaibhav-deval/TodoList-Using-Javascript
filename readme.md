@@ -22,10 +22,6 @@ This project allows users to manage tasks across different stages using **drag a
 - **In Progress**
 - **Done**
 
-Tasks can be freely moved between these columns.
-
----
-
 ## 🛠️ Tech Stack
 
 - **HTML5** – Structure & semantics
@@ -73,9 +69,6 @@ Help during revision & interviews
 
 The logic and implementation are original; only the documentation and comments were refined with the help of ChatGPT.
 
-📸 Preview
-
-(Add screenshots or a GIF here if you want)
 
 🔮 Future Improvements
 
