@@ -1,30 +1,48 @@
+/* ===============================
+   1️⃣ GLOBAL RESET & BASE SETUP
+=============================== */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+/* Full viewport usage */
 html,
 body {
   width: 100%;
   height: 100%;
 }
 
+
+/* ===============================
+   2️⃣ CSS VARIABLES (DESIGN SYSTEM)
+=============================== */
+
 :root {
+  /* Colors */
   --primary-color: #ff6f61;
   --secondary-color: #4a90e2;
   --white-color: #d2d2d2;
   --background-color1: #1a1919;
   --background-color2: #333232;
+
+  /* Padding scale */
   --p-1: 5px;
   --p-2: 10px;
   --p-3: 15px;
   --p-4: 20px;
   --p-5: 25px;
+
+  /* Margin scale */
   --m-1: 5px;
   --m-2: 10px;
   --m-3: 15px;
   --m-4: 20px;
   --m-5: 25px;
+
+  /* Border radius scale */
   --radius-1: 5px;
   --radius-2: 10px;
   --radius-3: 15px;
@@ -32,180 +50,269 @@ body {
   --radius-5: 25px;
 }
 
+
+/* ===============================
+   3️⃣ MAIN LAYOUT
+=============================== */
+
 main {
   padding: var(--p-4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   height: 100vh;
   width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--m-5);
+
   background-color: var(--background-color1);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+
+/* ===============================
+   4️⃣ NAVBAR
+=============================== */
+
 nav {
-  border-radius: var(--radius-3);
-  padding: var(--p-3);
   width: 100%;
   height: 60px;
-  background-color: var(--background-color2);
+  padding: var(--p-3);
+  border-radius: var(--radius-3);
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  background-color: var(--background-color2);
 }
 
 nav h1 {
-  color: var(--primary-color);
   font-size: 1.5rem;
+  color: var(--primary-color);
 }
+
 nav button {
   padding: var(--p-2) var(--p-3);
-  border: none;
   border-radius: var(--radius-4);
+  border: none;
+
   background-color: var(--secondary-color);
   color: var(--white-color);
+
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 nav button:hover {
-  border: 1px solid var(--secondary-color);
   background-color: var(--primary-color);
+  transform: scale(1.05);
 }
 
+
+/* ===============================
+   5️⃣ KANBAN BOARD SECTION
+=============================== */
+
 section {
-  padding-block: var(--p-4);
   flex-grow: 1;
   width: 100%;
-  color: var(--white-color);
+  padding-block: var(--p-4);
+
   display: flex;
+  gap: var(--m-5);
   align-items: center;
-  gap: var(--m-4);
+
+  color: var(--white-color);
 }
+
+/* Highlight column while dragging */
+.hover-over {
+  border: 2px dashed var(--primary-color);
+  transform: scale(1.02);
+}
+
+
+/* ===============================
+   6️⃣ INDIVIDUAL COLUMNS
+=============================== */
+
 section .sectionColumns {
-  background-color: var(--background-color2);
   flex-grow: 1;
+  max-width: calc(100% / 3);
   height: 100%;
-  border-radius: var(--radius-3);
+
+  background-color: var(--background-color2);
   padding: var(--p-3);
+  border-radius: var(--radius-3);
+
   display: flex;
   flex-direction: column;
-  max-width: calc(100% / 3);
   gap: var(--m-2);
+
+  transition: transform 0.3s ease, border 0.3s ease;
 }
 
 .sectionColumns .sectionHeadings {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   font-size: 1.25rem;
   margin-bottom: var(--m-3);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   color: var(--white-color);
 }
 
+
+/* ===============================
+   7️⃣ TASK CARD
+=============================== */
+
 .sectionColumns .task {
-  text-wrap: wrap;
   display: flex;
   flex-direction: column;
   gap: var(--m-4);
-  overflow: hidden;
-  cursor: grab;
+
   background-color: var(--background-color1);
   border-radius: var(--radius-2);
+
+  cursor: grab;
+  overflow: hidden;
   position: relative;
 }
 
+/* Task header */
 .task .upper {
   background-color: var(--primary-color);
   padding: var(--p-3) var(--p-2);
-  font-size: 1rem;
-  color: var(--white-color);
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 1;
+
+  font-size: 1rem;
+  color: var(--white-color);
 }
+
+/* Task description (hidden by default) */
 .task .lower {
-  padding-inline: var(--p-2);
-  padding-bottom: var(--p-3);
-  border-radius: var(--radius-2);
+  padding: 0 var(--p-2) var(--p-3);
   font-size: 0.9rem;
   color: var(--white-color);
-  transform: translateY(-100%);
-  transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+
   height: 0;
   opacity: 0;
-  scale: 0.5;
+  transform: translateY(-20px) scale(0.95);
+
+  transition: all 0.4s ease;
 }
-.task:has(:hover) .lower {
-  transform: translateY(0);
+
+/* Reveal description on hover */
+.task:hover .lower {
   height: auto;
   opacity: 1;
-  scale: 1;
+  transform: translateY(0) scale(1);
 }
+
+
+/* ===============================
+   8️⃣ DELETE BUTTON
+=============================== */
 
 .taskDltBtn {
-  border: none;
-  background-color: var(--secondary-color);
   padding: var(--p-1) var(--p-2);
   border-radius: var(--radius-3);
+  border: none;
+
+  background-color: var(--secondary-color);
   color: var(--white-color);
-  cursor: pointer;
+
   font-size: 1rem;
-  transition: all 0.3s ease-in-out;
-}
-.taskDltBtn:hover {
-  scale: 1.1;
+  cursor: pointer;
+
+  transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
+.taskDltBtn:hover {
+  background-color: var(--background-color1);
+  transform: scale(1.1);
+}
+
+
+/* ===============================
+   9️⃣ ADD TASK MODAL
+=============================== */
+
 .addTaskWindow {
-  min-width: 500px;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
   z-index: 10;
-  background-color: var(--background-color2);
-  padding: var(--p-4);
-  border: 3px solid var(--primary-color);
-  border-radius: var(--radius-3);
-  display: flex;
+
+  display: none;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   gap: var(--m-3);
+
+  padding: var(--p-4);
+  backdrop-filter: blur(5px);
 }
+
+.addTaskWindow .formContainer {
+  min-width: 500px;
+  max-width: 900px;
+
+  padding: var(--p-4);
+  border-radius: var(--radius-3);
+  border: 3px solid var(--background-color1);
+
+  background-color: var(--background-color2);
+}
+
+
+/* ===============================
+   🔟 FORM ELEMENTS
+=============================== */
+
 .addTaskWindow form {
   display: flex;
   flex-direction: column;
   gap: var(--m-3);
 }
 
-form input,
-form select,
-form textarea {
-  color: var(--secondary-color);
-  outline: none;
-  padding: var(--p-2);
-  border-radius: var(--radius-2);
-  border: none;
+form label {
   font-size: 1rem;
+  color: var(--white-color);
 }
 
-form label {
-  color: var(--primary-color);
+form input,
+form textarea,
+form select {
+  padding: var(--p-2);
+  border-radius: var(--radius-2);
+  border: none;
+  outline: none;
+
   font-size: 1rem;
+  color: var(--secondary-color);
 }
+
 form button {
   padding: var(--p-2);
-  border: none;
   border-radius: var(--radius-2);
+  border: none;
+
   background-color: var(--primary-color);
   color: var(--white-color);
+
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+
+  transition: background-color 0.3s ease;
 }
 
 form button:hover {

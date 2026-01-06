@@ -2,98 +2,114 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
+    <!-- Responsive layout -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todo-List</title>
+
+    <title>Kanban Board</title>
+    <!-- favicon -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://images.unsplash.com/photo-1651055693398-0d66969cf759?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    />
+
+    <!-- Styles -->
     <link rel="stylesheet" href="style.css" />
+
+    <!-- Script (defer ensures DOM loads first) -->
     <script src="script.js" defer></script>
   </head>
+
   <body>
     <main>
+      <!-- =========================
+           NAVBAR
+      ========================== -->
       <nav>
-        <div class="left"><h1>KanBan</h1></div>
-        <div class="right"><button>Add New Task</button></div>
-      </nav>
-      <section>
-        <div class="addTaskWindow">
-          <h2>Add New Task</h2>
-          <form id="taskForm">
-            <label for="taskTitle">Task Title:</label>
-            <input
-              type="text"
-              id="taskTitle"
-              name="taskTitle"
-              placeholder="Enter Task Title"
-              required
-            />
-
-            <label for="taskDescription">Task Description:</label>
-            <textarea
-              id="taskDescription"
-              name="taskDescription"
-              placeholder="Enter Task Description"
-            ></textarea>
-
-            <button class="formBtn" type="submit">Add Task</button>
-            <button class="formBtn" type="button" id="closeFormBtn">
-              Close
-            </button>
-          </form>
+        <div class="left">
+          <h1>Kanban</h1>
         </div>
-        <div class="sectionColumns">
+
+        <div class="right">
+          <button class="addTaskBtn" aria-label="Add new task">
+            Add New Task
+          </button>
+        </div>
+      </nav>
+
+      <!-- =========================
+           MAIN BOARD SECTION
+      ========================== -->
+      <section>
+        <!-- =========================
+             ADD TASK MODAL
+        ========================== -->
+        <div class="addTaskWindow" role="dialog" aria-modal="true">
+          <div class="formContainer">
+            <h2>Add New Task</h2>
+
+            <form id="taskForm">
+              <!-- Task Title -->
+              <label for="taskTitle">Task Title</label>
+              <input
+                type="text"
+                id="taskTitle"
+                name="taskTitle"
+                placeholder="Enter task title"
+                required
+              />
+
+              <!-- Task Description -->
+              <label for="taskDescription">Task Description</label>
+              <textarea
+                id="taskDescription"
+                name="taskDescription"
+                placeholder="Enter task description"
+                rows="4"
+              ></textarea>
+
+              <!-- Form Actions -->
+              <button class="formBtn" type="submit">Add Task</button>
+
+              <button
+                class="formBtn closeFormBtn"
+                type="button"
+                id="closeFormBtn"
+              >
+                Close
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- =========================
+             TODO COLUMN
+        ========================== -->
+        <div class="sectionColumns" id="todo">
           <div class="sectionHeadings">
             <h2>To Do</h2>
-            <p>count</p>
-          </div>
-          <div draggable="true" class="task">
-            <div class="upper">
-              <h3>Task Title</h3>
-              <button class="taskDltBtn">Delete</button>
-            </div>
-            <div class="lower">
-              <p>
-                Task Description Lorem ipsum dolor sit amet consect facilis
-                iste, expedita alias deserunt pariatur corrupti ipsa debitis
-                cumque nam sit aliquam consequuntur ab. Eligendi.*5
-              </p>
-            </div>
-          </div>
-          <div draggable="true" class="task">
-            <div class="upper">
-              <h3>Task Title</h3>
-              <button class="taskDltBtn">Delete</button>
-            </div>
-            <div class="lower">
-              <p>
-                Task Description Lorem ipsum dolor sit amet consect facilis
-                iste, expedita alias deserunt pariatur corrupti ipsa debitis
-                cumque nam sit aliquam consequuntur ab. Eligendi.*5
-              </p>
-            </div>
-          </div>
-          <div draggable="true" class="task">
-            <div class="upper">
-              <h3>Task Title</h3>
-              <button class="taskDltBtn">Delete</button>
-            </div>
-            <div class="lower">
-              <p>
-                Task Description Lorem ipsum dolor sit amet consect facilis
-                iste, expedita alias deserunt pariatur corrupti ipsa debitis
-                cumque nam sit aliquam consequuntur ab. Eligendi.*5
-              </p>
-            </div>
+            <p class="task-count">0</p>
           </div>
         </div>
-        <div class="sectionColumns">
+
+        <!-- =========================
+             IN PROGRESS COLUMN
+        ========================== -->
+        <div class="sectionColumns" id="progress">
           <div class="sectionHeadings">
             <h2>In Progress</h2>
-            <p>count</p>
+            <p class="task-count">0</p>
           </div>
         </div>
-        <div class="sectionColumns">
+
+        <!-- =========================
+             DONE COLUMN
+        ========================== -->
+        <div class="sectionColumns" id="done">
           <div class="sectionHeadings">
             <h2>Done</h2>
-            <p>count</p>
+            <p class="task-count">0</p>
           </div>
         </div>
       </section>
